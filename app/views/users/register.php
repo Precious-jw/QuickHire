@@ -41,15 +41,15 @@
               <?php echo flash('register_success'); ?>
               <form id="loginForm" action="<?=URLROOT?>/users/apply" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                  <input type="text" class="form-control <?= (!empty($data['fullname_err'])) ? 'is-invalid' : ''; ?>" id="fullname" name="fullname" value="<?= $data['fullname']; ?>"  placeholder="Enter Your Full Name">
+                  <input type="text" class="form-control <?= (!empty($data['fullname_err'])) ? 'is-invalid' : ''; ?>" id="fullname" name="fullname" value="<?= $data['fullname']; ?>"  placeholder="Enter Your Full Name" required>
                   <span class="invalid-feedback"><?= $data['fullname_err']; ?></span>
                 </div>
                 <div class="mb-3">
-                  <input type="email" class="form-control <?= (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $data['email']; ?>" placeholder="Enter Your Email address">
+                  <input type="email" class="form-control <?= (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $data['email']; ?>" placeholder="Enter Your Email address" required>
                   <span class="invalid-feedback"><?= $data['email_err']; ?></span>
                 </div>
                 <div class="mb-3">
-                  <select id="gender" name="gender" class="form-control <?= (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>"  value="<?= $data['gender']; ?>">
+                  <select id="gender" name="gender" class="form-control <?= (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>"  value="<?= $data['gender']; ?>" required>
                     <option>-- Select Gender --</option>
                     <option>Male</option>
                     <option>Female</option>
@@ -60,11 +60,11 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Date of Birth</span>
                   </div>
-                  <input type="date" class="form-control <?= (!empty($data['dob_err'])) ? 'is-invalid' : ''; ?>" id="dob" name="dob" value="<?= $data['dob']; ?>">
+                  <input type="date" class="form-control <?= (!empty($data['dob_err'])) ? 'is-invalid' : ''; ?>" id="dob" name="dob" value="<?= $data['dob']; ?>" required>
                   <span class="invalid-feedback"><?= $data['dob_err']; ?></span>
                 </div>
                 <div class="mb-3">
-                  <select id="type" name="type" class="form-control <?= (!empty($data['type_err'])) ? 'is-invalid' : ''; ?>">
+                  <select id="type" name="type" class="form-control <?= (!empty($data['type_err'])) ? 'is-invalid' : ''; ?>" required>
                     <option>-- Select Account Type --</option>
                     <option value="worker">I want to Work</option>
                     <option value="employer">I want to Hire</option>
@@ -73,12 +73,12 @@
                 </div>
                 
                 <div class="mb-3">
-                  <input type="password" class="form-control <?= (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" id="password" placeholder="Password" name="password">
+                  <input type="password" class="form-control <?= (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" id="password" placeholder="Password" name="password" required>
                   <span class="invalid-feedback"><?= $data['password_err']; ?></span>
                 </div>
 
                 <div class="mb-3">
-                  <input type="password" class="form-control <?= (!empty($data['confirm_pass_err'])) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Confirm Password" name="confirm_pass">
+                  <input type="password" class="form-control <?= (!empty($data['confirm_pass_err'])) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Confirm Password" name="confirm_pass" required>
                   <span class="invalid-feedback"><?= $data['confirm_pass_err']; ?></span>
                 </div>
                
