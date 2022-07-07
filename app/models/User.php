@@ -9,8 +9,8 @@
     // Add User / Register
     public function register($data){
       // Prepare Query
-      $this->db->query('INSERT INTO users (fullname, email, gender, dob, type, password) 
-      VALUES (:fullname, :email, :gender, :dob, :type, :password)');
+      $this->db->query('INSERT INTO users (fullname, email, gender, dob, type, password, status) 
+      VALUES (:fullname, :email, :gender, :dob, :type, :password, :status)');
 
       // Bind Values
       $this->db->bind(':fullname', $data['fullname']);
@@ -19,6 +19,7 @@
       $this->db->bind(':dob', $data['dob']);
       $this->db->bind(':type', $data['type']);
       $this->db->bind(':password', $data['password']);
+      $this->db->bind(':status', $data['status']);
       
       //Execute
       if($this->db->execute()){
@@ -75,10 +76,25 @@
       }
     }
 
+    public function checkUserStatus($email){
+      $this->db->query("SELECT * FROM users WHERE email = :email");
+      $this->db->bind(':email', $email);
+
+      $row = $this->db->single();
+      $results = $row->status;
+
+      if($results != 0){
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+
     // Login / Authenticate User
-    public function login($id, $password){
-      $this->db->query("SELECT * FROM users WHERE accountid = :accountid");
-      $this->db->bind(':accountid', $id);
+    public function login($email, $password){
+      $this->db->query("SELECT * FROM users WHERE email = :email");
+      $this->db->bind(':email', $email);
 
       $row = $this->db->single();
       

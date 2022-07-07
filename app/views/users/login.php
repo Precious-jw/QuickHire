@@ -15,9 +15,8 @@
 
 <!-- Stylesheet
 ============================================= -->
-<link rel="stylesheet" type="text/css" href="<?= URLROOT?>/assets/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<?= URLROOT?>/assets/vendor/font-awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="<?= URLROOT?>/assets/css/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="<?= URLROOT?>/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<?= URLROOT?>/assets/css/fontawesome.css">
 <!-- Colors Css -->
 <link id="color-switcher" type="text/css" rel="stylesheet" href="#">
 </head>
@@ -29,51 +28,73 @@
 </div>
 <!-- Preloader End -->
 
-<div id="main-wrapper" class="min-vh-100 d-flex flex-column">
-  <!-- Login Form
-  ============================================= -->
-  <div class="container my-auto"> 
-    <div class="row">
-      <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 m-auto py-5 px-5 bg-light">
-        <div class="logo text-center text-2"><P>LOGIN</P> </div>
-        <?php echo flash('register_success'); ?>
-        <form id="loginForm" action="<?=URLROOT?>/users/login" method="post">
-            <div class="input-group mb-2">
-              <input type="text" class="form-control <?= (!empty($data['accountid_err'])) ? 'is-invalid' : ''; ?>" id="accountid" name="accountid" value="<?php echo $data['accountid']; ?>" required="" placeholder="Email address">
-              <span class="invalid-feedback"><?php echo $data['accountid_err']; ?></span>
-            </div> 
-            <div class="input-group">
-              <input type="password" class="form-control <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>" id="password" name="password" required="" placeholder="Password">
-              <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
+  <div id="main-wrapper" class="d-flex flex-column mb">
+    <div class="container-fluid px-0 bg-primary">
+    <!-- Login Form
+      ============================================= -->
+      <div class="col d-flex align-items-center p-5">
+        <div class="container-fluid my-3 bg-white shadow" style="width: 40%">
+          <div class="row g-0">
+            <div class="col-12 col-lg-10 col-xl-9 mx-auto py-5">
+              <h3 class="text-center mt-3 mb-4">Login</h3>
+              <?php echo flash('register_success'); ?>
+              <form id="loginForm" action="<?=URLROOT?>/users/login" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                  <input type="email" class="form-control <?= (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $data['email']; ?>" placeholder="Enter Your Email address" required>
+                  <span class="invalid-feedback"><?= $data['email_err']; ?></span>
+                </div>
+                
+                <div class="mb-3">
+                  <input type="password" class="form-control <?= (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" id="password" placeholder="Password" name="password" required>
+                  <span class="invalid-feedback"><?= $data['password_err']; ?></span>
+                </div>
+                
+                <div class="d-grid my-3">
+                  <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+              </form>
+              <p class="text-2 text-center text-muted mb-2">Not yet a customer? Click <a class="btn-link" href="<?=URLROOT?>/users/apply"> here</a> to Sign Up </p>
+              <p class="text-center mb-0"><a class="btn-link" href="#">Forgot Password?</a></p>
             </div>
-          <div class="d-grid my-4"><button class="btn btn-primary shadow-none" type="submit">Login</button></div>
-        </form>
-        <p class="text-2 text-center text-muted mb-2">Not yet a customer? Click <a class="btn-link" href="<?=URLROOT?>/users/apply"> here</a> to Sign Up </p>
-        <p class="text-center mb-0"><a class="btn-link" href="#">Forgot Password?</a></p>
+          </div>
+        </div>
       </div>
+      <!-- Login Form End --> 
     </div>
+    <!-- Footer
+    ============================================= -->
+    <div class="container-fluid py-2  mt-auto">
+      <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="#">Ykredi Finance</a>. All Rights Reserved.</p>
+    </div>
+  
+  
   </div>
-  <!-- Login Form End -->
-  
-  <!-- Footer
-  ============================================= -->
-  <div class="container-fluid bg-white py-2">
-    <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="#">Ykredi Finance</a>. All Rights Reserved.</p>
-  </div>
-  
-  
-</div>
 
 <!-- Back to Top
 ============================================= --> 
-<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="#" class="position-fixed fixed-bottom outline-primary"><i class="fa fa-chevron-up"></i></a>
 
 
-<!-- Script --> 
-<script src="<?= URLROOT;?>/assets/vendor/jquery/jquery.min.js"></script> 
-<script src="<?= URLROOT;?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
-<!-- Style Switcher --> 
-<script src="<?= URLROOT;?>/assets/js/switcher.min.js"></script> 
-<script src="<?= URLROOT;?>/assets/js/theme.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="<?= URLROOT?>/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= URLROOT?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="<?= URLROOT?>/assets/js/custom.js"></script>
+    <script src="<?= URLROOT?>/assets/js/owl.js"></script>
+    <script src="<?= URLROOT?>/assets/js/slick.js"></script>
+    <script src="<?= URLROOT?>/assets/js/accordions.js"></script>
+
+    <script language = "text/Javascript"> 
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
 </body>
 </html>

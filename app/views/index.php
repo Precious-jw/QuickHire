@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>PHPJabbers.com | Free Job Agency Website Template</title>
+    <title>QuickHire | Hire and get hired</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= URLROOT?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Job Agency <em> Website</em></h2></a>
+          <a class="navbar-brand" href="index.html"><h2> QuickHire </h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -84,12 +84,22 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?= URLROOT?>/users/apply">Sign Up</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?= URLROOT?>/users/login">Login</a>
-              </li>
+
+              <?php if(isset($_SESSION['user_id'])) : ?>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="<?= URLROOT?>/users/logout">Logout</a>
+                </li>
+              <?php else : ?>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="<?= URLROOT?>/users/apply">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?= URLROOT?>/users/login">Login</a>
+                </li>
+
+              <?php endif; ?>
             </ul>
           </div>
         </div>

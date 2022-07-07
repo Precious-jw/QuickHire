@@ -21,8 +21,12 @@ class Users extends Controller
       
   }
 
-  public function apply()
-  {
+  public function apply(){
+
+    //Check if the user is logged in
+    if ($this->isLoggedIn()) {
+      redirect('index');
+    }
     // Check if POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // Sanitize POST
@@ -36,6 +40,7 @@ class Users extends Controller
         'confirm_pass' => trim($_POST['confirm_pass']),
         'dob' => trim($_POST['dob']),
         'type' => trim($_POST['type']),
+        'status' => 0,
         'fullname_err' =>'',
         'email_err' =>'',
         'password_err' =>'',
@@ -70,11 +75,6 @@ class Users extends Controller
       if($data['confirm_pass'] != $data['password']){
         $data['confirm_pass_err'] = 'Passwords do not match.';
       }
-
-      // Validate confirm password
-      if (empty($data['mobile'])) {
-        $data['mobile_err'] = 'Please enter phone number.';
-      }
       
       if ($data['gender'] == '-- Select Gender --') {
         $data['gender_err'] = 'Please Select your Gender.';
@@ -95,29 +95,49 @@ class Users extends Controller
 
         //Execute
         if ($this->userModel->register($data)) {
-          flash('register_success', 'You are now registered, please log in');
-          
-          /*
           $email = $data['email'];
-          $mail = new PHPMailer;
-          $mail->isSMTP();
-          $mail->SMTPDebug = 0;
-          $mail->Host = 'smtp.hostinger.com';
-          $mail->Port = 587;
-          $mail->SMTPAuth = true;
-          $mail->Username = 'info@bitecript.com';
-          $mail->Password = 'Muyi@1994';
-          $mail->setFrom('info@bitecript.com', 'bitecript.com');
-          $mail->addReplyTo('info@bitecript.com/', 'bitecript.com');
-          $mail->addAddress("$email", "Successful Registration");
-          $mail->Subject = 'bitecript.com Registration';
-          $mail->msgHTML(file_get_contents('tt.html'), __DIR__);
-          $mail->Body = '<h2>bitecript.com</h2><p> We are so happy to have you on board. Don\'t wait too long before you activate your first investment. </p>';
-          if (!$mail->send()) {
-          }
+          $password = $data['password'];
+
+          flash('register_success', 'Your account has been created sucessfully. To verify your account, please click on the link sent to the email address you provided. <a href="https://localhost/quickhire/users/apply?email=$email&password=$password">Here</a>.');
           
-          redirect('users/login');
+          /*$to = $data['email'];
+          $password = $data['password'];
+          $user_name = $data['fullname'];
+          $subject = 'QuickHire | Sign Up Verification';
+          $message = "
+
+          <p> Hello ".$user_name.". We're happy to have you on board at QuickHire! </p>
+          <p> Please click on the link below to activate your account: \n 
+          https://localhost/quickhire/users/apply?email=".$to."&password=".$password." </p>\n\n
+
+          <p> If you did not send this request, please ignore this message. </p>
+
+          ";
+
+          $headers = 'From:noreply@quickhire.com' . "\r\n";
+
+          mail($to, $subject, $message, $headers);
           */
+
+          // Init data
+          $data = [
+            'fullname' =>'',
+            'email' =>'',
+            'password' =>'',
+            'confirm_pass' => '',
+            'gender' =>'',
+            'dob' =>'',
+            'type' =>'',
+            'status' =>'',
+            'fullname_err' =>'',
+            'email_err' =>'',
+            'password_err' =>'',
+            'confirm_pass_err' => '',
+            'gender_err' =>'',
+            'dob_err' =>'',
+            'type_err' =>'',
+          ];
+          
         } else {
           die('Something went wrong');
         }
@@ -138,6 +158,7 @@ class Users extends Controller
         'gender' =>'',
         'dob' =>'',
         'type' =>'',
+        'status' =>'',
         'fullname_err' =>'',
         'email_err' =>'',
         'password_err' =>'',
@@ -156,8 +177,112 @@ class Users extends Controller
   
   public function login()
   {
+    if ($this->isLoggedIn()) {
+      redirect('index');
+    }
+    // Check if POST
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Sanitize POST
+      $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'email_err' =>'',
+        'password_err' =>'',
+      ];
+
+      // Check for email
+      if (empty($data['email'])) {
+        $data['accountid_err'] = 'Please enter name.';
+      }
+
+      // Check for password
+      if (empty($data['password'])) {
+        $data['password_err'] = 'Please enter password.';
+      }
+
+      // Check for user
+      if ($this->userModel->findUserByEmail($data['email'])) {
+        // User Found
+
+        // Make sure errors are empty
+        if (empty($data['email_err']) && empty($data['password_err'])) {
+
+          // Check and set logged in user
+          $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+          if ($loggedInUser) {
+            //Check if user has activated account
+            if($this->userModel->checkUserStatus($data['email'])){
+
+              // User Authenticated! Create session variable
+              $this->createUserSession($loggedInUser);
+              flash('register_success', 'Your account has been activated successfully and you are now logged in');
+            } else {
+              flash('register_success', 'Hi. Please click on the link in the email we sent you to activate your account');
+              // Load View
+              $this->view('users/login', $data);
+            }
+          } else {
+            flash('register_success', 'Invalid username or password', 'alert alert-danger');
+            // Load View
+            $this->view('users/login', $data);
+          }
+          
+          
+        } else {
+          // Load View
+          $this->view('users/login', $data);
+        }
+
+      } else {
+        // No User
+        flash('register_success', 'Invalid username or password', 'alert alert-danger');
+        // Load View
+        $this->view('users/login', $data);
+      }
+
+    } else {
+      // If NOT a POST
+
+      // Init data
+      $data = [
+        'email' => '',
+        'password' => '',
+        'email_err' => '',
+        'password_err' => '',
+      ];
+
       // Load View
       $this->view('users/login', $data);
+    }
+  }
+
+  public function createUserSession($user){
+    $_SESSION['user_id'] = $user->id;
+    $_SESSION['user_name'] = $user->fullname;
+    $_SESSION['user_email'] = $user->email;
+
+    redirect('users/login');
+  }
+
+  public function logout(){
+    unset($_SESSION['user_id']);
+    unset($_SESSION['user_name']);
+    unset($_SESSION['user_email']);
+
+    session_destroy();
+
+    redirect('users/login');
+  }
+
+  public function isLoggedIn(){
+    if(isset($_SESSION['user_id'])){
+      return true;
+    } else {
+      return false;
+    }
   }
   
 }
