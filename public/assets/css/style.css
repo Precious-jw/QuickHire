@@ -234,6 +234,19 @@ header {
     -o-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
 }
+.header {
+	position: sticky;
+	top: 0;
+	z-index: 99999;
+	width: 100%;
+	background-color: white!important;
+	min-height: 50px;
+	box-shadow: 1px 0px 5px 0px grey;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
 header .navbar {
 	padding: 20px 0px;
 }
@@ -263,6 +276,12 @@ header .navbar {
 	float: 	left;
 	margin-top: 12px;
 	outline: none;
+}
+.header .navbar .navbar-brand{
+	margin-top: 0;
+}
+.header .navbar .navbar-brand h2 {
+	color: #007bff;
 }
 .navbar .navbar-brand h2 {
 	color: #fff;
@@ -295,6 +314,9 @@ header .navbar {
 	color: #fff;
 	transition: all 0.5s;
 	margin-top: 5px;
+}
+.header .navbar .navbar-nav a.nav-link {
+	color: #000;
 }
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .active>.nav-link,

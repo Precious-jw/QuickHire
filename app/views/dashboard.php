@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <header class="">
+    <div class="header">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
           <a class="navbar-brand" href="<?= URLROOT?>"><h2>QUICKHIRE</h2></a>
@@ -62,7 +62,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="<?= URLROOT?>">Home
                   <span class="sr-only">(current)</span>
                 </a>
@@ -79,11 +79,11 @@
 
               <?php if(isset($_SESSION['user_id'])) : ?>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                   <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $_SESSION['user_name'] ?></a>
                 
                   <div class="dropdown-menu p-0 align-center">
-                      <a class="dropdown-item py-2" href="<?= URLROOT?>/pages/dashboard">Dashboard</a>
+                      <a class="dropdown-item py-2 active" href="<?= URLROOT?>/pages/dashboard">Dashboard</a>
                       <a class="dropdown-item py-2" href="about.html">View Profile</a>
                       <a class="dropdown-item py-2" href="<?= URLROOT?>/users/logout">Logout</a>
                   </div>
@@ -103,8 +103,14 @@
           </div>
         </div>
       </nav>
-    </header>
+    </div>
 
+    <!-- Sidebar -->
+
+    
+
+    <!-- Sidebar End -->
+    
     <!-- Page Content -->
     <!-- Banner Starts Here -->
     <div class="main-banner header-text" id="top">
@@ -112,56 +118,13 @@
           <!-- Item -->
           <div class="item item-1">
             <div class="img-fill">
-                <div class="text-content">
-                  <h6>lorem ipsum dolor sit amet!</h6>
-                  <h4>Quam temporibus accusam <br> hic ducimus quia</h4>
-                  <p>Magni deserunt dolorem consectetur adipisicing elit. Corporis molestiae optio, laudantium odio quod rerum maiores, omnis unde quae illo.</p>
-                  <a href="jobs.html" class="btn btn-primary">Jobs</a>
-                </div>
-            </div>
-          </div>
-          <!-- // Item -->
-          <!-- Item -->
-          <div class="item item-2">
-            <div class="img-fill">
-                <div class="text-content">
-                  <h6>magni deserunt dolorem harum quas!</h6>
-                  <h4>Aliquam iusto harum <br>  ratione porro odio</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At culpa cupiditate mollitia adipisci assumenda laborum eius quae quo excepturi, eveniet. Dicta nulla ea beatae consequuntur?</p>
-                  <a href="about.html" class="filled-button">About Us</a>
-                </div>
-            </div>
-          </div>
-          <!-- // Item -->
-          <!-- Item -->
-          <div class="item item-3">
-            <div class="img-fill">
-                <div class="text-content">
-                  <h6>alias officia qui quae vitae natus!</h6>
-                  <h4>Lorem ipsum dolor <br>sit amet, consectetur.</h4>
-                  <p>Vivamus ut tellus mi. Nulla nec cursus elit, id vulputate mi. Sed nec cursus augue. Phasellus lacinia ac sapien vitae dapibus. Mauris ut dapibus velit cras interdum nisl ac urna tempor mollis.</p>
-                  <a href="contact.html" class="filled-button">Contact Us</a>
-                </div>
+                
             </div>
           </div>
           <!-- // Item -->
         </div>
     </div>
     <!-- Banner Ends Here -->
-
-    <div class="request-form">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <h4>Request a call back right now ?</h4>
-            <span>Mauris ut dapibus velit cras interdum nisl ac urna tempor mollis.</span>
-          </div>
-          <div class="col-md-4">
-            <a href="contact.html" class="border-button">Contact Us</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="services">
       <div class="container">
@@ -222,28 +185,6 @@
             </div>
 
             <br>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fun-facts">
-      <div class="container">
-        <div class="more-info-content">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="left-image">
-                <img src="<?= URLROOT?>/assets/images/about-1-570x350.jpg" class="img-fluid" alt="">
-              </div>
-            </div>
-            <div class="col-md-6 align-self-center">
-              <div class="right-content">
-                <span>Who we are</span>
-                <h2>Get to know about <em>our company</em></h2>
-                <p>Curabitur pulvinar sem a leo tempus facilisis. Sed non sagittis neque. Nulla conse quat tellus nibh, id molestie felis sagittis ut. Nam ullamcorper tempus ipsum in cursus</p>
-                <a href="about.html" class="filled-button">Read More</a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -386,7 +327,6 @@
     <!-- Additional Scripts -->
     <script src="<?= URLROOT?>/assets/js/custom.js"></script>
     <script src="<?= URLROOT?>/assets/js/owl.js"></script>
-    <script src="<?= URLROOT?>/assets/js/slick.js"></script>
     <script src="<?= URLROOT?>/assets/js/accordions.js"></script>
 
     <script language = "text/Javascript"> 

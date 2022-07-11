@@ -105,6 +105,7 @@
         return false;
       }
     }
+    
     public function checkpassword($email, $password){
       $this->db->query("SELECT * FROM users WHERE email = :email");
       $this->db->bind(':email', $email);
@@ -120,9 +121,9 @@
     }
 
     // Find User By ID
-    public function getUserById($id){
-      $this->db->query("SELECT * FROM users WHERE id = :id");
-      $this->db->bind(':id', $id);
+    public function getUserByEmail($email){
+      $this->db->query("SELECT * FROM users WHERE email = :email");
+      $this->db->bind(':email', $email);
 
       $row = $this->db->single();
 

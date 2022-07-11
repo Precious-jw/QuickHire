@@ -28,12 +28,13 @@
 </div>
 <!-- Preloader End -->
 
-  <div id="main-wrapper" class="d-flex flex-column mb">
-    <div class="container-fluid px-0 bg-primary">
-    <!-- Login Form
+  <div id="main-wrapper" class="d-flex flex-column bg-primary" style="height: 100vh">
+
+    <div class="container-fluid px-0">
+      <!-- Login Form
       ============================================= -->
       <div class="col d-flex align-items-center p-5">
-        <div class="container-fluid my-3 bg-white shadow" style="width: 40%">
+        <div class="container-fluid my-3 bg-white shadow w-50">
           <div class="row g-0">
             <div class="col-12 col-lg-10 col-xl-9 mx-auto py-5">
               <h3 class="text-center mt-3 mb-4">Login</h3>
@@ -45,7 +46,7 @@
                 </div>
                 
                 <div class="mb-3">
-                  <input type="password" class="form-control <?= (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" id="password" placeholder="Password" name="password" required>
+                  <input type="password" class="form-control <?= (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" id="password" placeholder="Password" name="password">
                   <span class="invalid-feedback"><?= $data['password_err']; ?></span>
                 </div>
                 
@@ -61,22 +62,20 @@
       </div>
       <!-- Login Form End --> 
     </div>
+    
     <!-- Footer
     ============================================= -->
-    <div class="container-fluid py-2  mt-auto">
-      <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="#">Ykredi Finance</a>. All Rights Reserved.</p>
+    <div class="container-fluid py-2 mt-auto bg-white">
+      <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="<?=URLROOT?>">QuickHire</a>. All Rights Reserved.</p>
     </div>
   
   
   </div>
 
-<!-- Back to Top
-============================================= --> 
-<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="#" class="position-fixed fixed-bottom outline-primary"><i class="fa fa-chevron-up"></i></a>
 
 
 <!-- Bootstrap core JavaScript -->
-<script src="<?= URLROOT?>/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= URLROOT?>/vendor/jquery/jquery.min.js"></script>
     <script src="<?= URLROOT?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Additional Scripts -->

@@ -24,9 +24,7 @@ class Users extends Controller
   public function apply(){
 
     //Check if the user is logged in
-    if ($this->isLoggedIn()) {
-      redirect('index');
-    }
+    
     // Check if POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // Sanitize POST
@@ -60,7 +58,7 @@ class Users extends Controller
       } else {
         // Check Email
         if ($this->userModel->findUserByEmail($data['email'])) {
-          $data['email_err'] = 'Email is already taken.';
+          $data['email_err'] = 'Email is already taken. Please login if this email belongs to you or click on "Forgot password".';
         }
       }
 
@@ -98,7 +96,7 @@ class Users extends Controller
           $email = $data['email'];
           $password = $data['password'];
 
-          flash('register_success', 'Your account has been created sucessfully. To verify your account, please click on the link sent to the email address you provided. <a href="https://localhost/quickhire/users/apply?email=$email&password=$password">Here</a>.');
+          flash('register_success', 'Your account has been created sucessfully. To verify your account, please click on the link sent to the email address you provided.');
           
           /*$to = $data['email'];
           $password = $data['password'];
@@ -137,6 +135,8 @@ class Users extends Controller
             'dob_err' =>'',
             'type_err' =>'',
           ];
+          
+          $this->view('users/login', $data);
           
         } else {
           die('Something went wrong');
@@ -178,7 +178,7 @@ class Users extends Controller
   public function login()
   {
     if ($this->isLoggedIn()) {
-      redirect('index');
+      redirect('pages/dashboard');
     }
     // Check if POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -220,7 +220,8 @@ class Users extends Controller
               $this->createUserSession($loggedInUser);
               flash('register_success', 'Your account has been activated successfully and you are now logged in');
             } else {
-              flash('register_success', 'Hi. Please click on the link in the email we sent you to activate your account');
+              $user = $this->userModel->getUserByEmail($data['email']);
+              flash('register_success', 'Hi ' .$user->fullname. '. Please your email for an activation link we sent you to activate your account');
               // Load View
               $this->view('users/login', $data);
             }

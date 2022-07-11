@@ -92,12 +92,20 @@
                 <div class="d-grid my-3"><button class="btn btn-primary" type="submit">Submit Application</button></div>
               </form>
               <p class="text-3 text-center text-muted">Already a customer? Click <a class="btn-link" href="<?=URLROOT?>/users/login">here</a> to login</p>
+              <p class="text-center mb-0"><a class="btn-link" href="#">Forgot Password?</a></p>
             </div>
           </div>
         </div>
       </div>
       <!-- Login Form End --> 
   </div>
+
+  <!-- Footer
+    ============================================= -->
+    <div class="container-fluid py-2 mt-auto bg-white">
+      <p class="text-center text-muted mb-0">Copyright &copy; 2022 <a href="<?=URLROOT?>">QuickHire</a>. All Rights Reserved.</p>
+    </div>
+
 </div>
 
 <!-- Bootstrap core JavaScript -->
