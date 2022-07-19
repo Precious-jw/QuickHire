@@ -3,7 +3,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 class Users extends Controller
 {
   public function __construct(){
-    $this->accountModel = $this->model('Account');
     $this->userModel = $this->model('User');
   }
  
@@ -189,7 +188,7 @@ class Users extends Controller
         'email' => trim($_POST['email']),
         'password' => trim($_POST['password']),
         'email_err' =>'',
-        'password_err' =>'',
+        'password_err' =>''
       ];
 
       // Check for email
@@ -268,6 +267,18 @@ class Users extends Controller
     redirect('users/login');
   }
 
+  public function isLoggedIn(){
+    if(isset($_SESSION['user_id'])){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function profile(){
+    $this->view('users/profile');
+  }
+
   public function logout(){
     unset($_SESSION['user_id']);
     unset($_SESSION['user_name']);
@@ -278,12 +289,6 @@ class Users extends Controller
     redirect('users/login');
   }
 
-  public function isLoggedIn(){
-    if(isset($_SESSION['user_id'])){
-      return true;
-    } else {
-      return false;
-    }
-  }
+  
   
 }

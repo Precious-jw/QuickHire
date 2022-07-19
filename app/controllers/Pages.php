@@ -1,7 +1,7 @@
 <?php
 class Pages extends Controller{
     public function __construct(){
-
+        $this->userModel = $this->model('User');
     }
 
     public function index(){
@@ -12,6 +12,11 @@ class Pages extends Controller{
 
     public function dashboard(){
         // Load View
-        $this->view('dashboard');
+
+        if (!(isset($_SESSION['user_id']))) {
+        redirect('index');
+        } else {
+            $this->view('dashboard');
+        }
     }
 }

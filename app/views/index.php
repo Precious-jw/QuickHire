@@ -74,17 +74,17 @@
                 <a class="nav-link" href="jobs.html">Post a Job</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="#contact">Contact Us</a>
               </li>
 
               <?php if(isset($_SESSION['user_id'])) : ?>
 
                 <li class="nav-item dropdown">
-                  <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $_SESSION['user_name'] ?></a>
+                <a class="dropdown-toggle nav-link mt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?= URLROOT?>/assets/images/map.jpg" class="rounded-circle" style="width: 5vh; height: 5vh;" alt="profile picture">  <b><?= $_SESSION['user_name'] ?></b></a>
                 
                   <div class="dropdown-menu p-0 align-center">
                       <a class="dropdown-item py-2" href="<?= URLROOT?>/pages/dashboard">Dashboard</a>
-                      <a class="dropdown-item py-2" href="about.html">View Profile</a>
+                      <a class="dropdown-item py-2" href="<?= URLROOT?>/users/profile">View Profile</a>
                       <a class="dropdown-item py-2" href="<?= URLROOT?>/users/logout">Logout</a>
                   </div>
                 </li>
@@ -248,6 +248,8 @@
         </div>
       </div>
     </div>
+    
+    <div id="contact"></div>
 
     <div class="callback-form">
       <div class="container">
